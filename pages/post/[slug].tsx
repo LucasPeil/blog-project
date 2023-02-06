@@ -39,12 +39,14 @@ const Post = ({ post }: Props) => {
                 src={urlFor(post.mainImage).url()!}
             />
             <article className="max-w-3xl mx-auto p-5">
-                <h1 className="text-3xl mt-10 mb-3">{post.title}</h1>
+                <div className=" flex  border-black-500 justify-center">
+                <h1 className="text-4xl  my-10">{post.title}</h1>
                 <h2 className="text-xl font-light text-gray-500 mb-2">
                     {post.description}
                 </h2>
+                </div>
 
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center justify-center space-x-2 border-black-500">
                     <img className="h-10 w-10 rounded-full" src={urlFor(post.author.image).url()!} alt="" />
                     <p className="font-extralight text-sm">
                         Publicado por <span className="text-green-600">{post.author.name}</span> -
@@ -52,7 +54,7 @@ const Post = ({ post }: Props) => {
                     </p>
                 </div>
 
-                <div className='mt-10'>
+                <div className=' my-10'>
                     <PortableText content={post.body}
                         dataset={process.env.NEXT_PUBLIC_SANITY_DATASET}
                         projectId={process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}
@@ -70,7 +72,8 @@ const Post = ({ post }: Props) => {
                                 <a href={href} className="text-blue-500 hover:underline">
                                     {children}
                                 </a>
-                            )
+                            ),
+                            
 
                         }}
                     />
@@ -135,10 +138,13 @@ const Post = ({ post }: Props) => {
                 <hr className="pb-2" />
                 {post.comments.map((comment) => (
                     <div key={comment._id}>
-                        <p>
-                            <span className="text-yellow-500 "> {comment.name}:</span>
-                            <span> {comment.comment}</span>
-                        </p>
+                        <div className=" flex justify-start items-center ">
+                            <img className="h-10 w-10 rounded-full " 
+                              src={urlFor(post.author.image).url()!} alt="" />
+                            <span className="text-yellow-600 mx-2 "> {comment.name}:</span>
+                        </div>
+                            <p className=" mx-10"> {comment.comment}</p>
+                        
                     </div>
 
                 ))}
